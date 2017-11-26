@@ -16,8 +16,8 @@
 				if(isset($_POST['tipo'])) {
 					if ($_POST['tipo'] == 'simples') {
 
-						$sql1 = "INSERT INTO categoria (nome) VALUES ('$categoria')"
-						$sql2 = "INSERT INTO categoria_simples (nome) VALUES ('$categoria')"
+						$sql1 = "INSERT INTO categoria (nome) VALUES ('$categoria');";
+						$sql2 = "INSERT INTO categoria_simples (nome) VALUES ('$categoria');";
 
 						echo("<p>$sql</p>"); 
 
@@ -28,9 +28,9 @@
 
 					elseif ($_POST['tipo'] == 'super') {
 						
-						$sql1 = "INSERT INTO categoria (nome) VALUES ('$categoria')"
-						$sql2 = "INSERT INTO super_categoria (nome) VALUES ('$categoria')"
-						$sql3 = "INSERT INTO constituida (super_categoria, categoria) VALUES ('$categoria', '$categoria_inferior')"
+						$sql1 = "INSERT INTO categoria (nome) VALUES ('$categoria');";
+						$sql2 = "INSERT INTO super_categoria (nome) VALUES ('$categoria');";
+						$sql3 = "INSERT INTO constituida (super_categoria, categoria) VALUES ('$categoria', '$categoria_inferior');";
 
 						echo("<p>$sql</p>"); 
 
