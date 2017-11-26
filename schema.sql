@@ -68,9 +68,16 @@ CREATE TABLE fornecedor (
 	nome VARCHAR(255)
 ); */
 
+CREATE TABLE evento_reposicao (
+	operador INT,
+    instante TIME,
+    
+    PRIMARY KEY(operador, instante)
+);
+
 CREATE TABLE reposicao ( /* n sei se funcemina :/ */
     ean TEXT,
-    nro INT,
+    nro SMALLSERIAL,
     lado TEXT,
     altura INT,
     operador INT,
