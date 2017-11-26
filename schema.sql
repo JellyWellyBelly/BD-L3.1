@@ -67,3 +67,23 @@ CREATE TABLE fornecedor (
 	nif ,
 	nome VARCHAR(255)
 ); */
+
+CREATE TABLE reposicao ( /* n sei se funcemina :/ */
+    ean TEXT,
+    nro INT,
+    lado TEXT,
+    altura INT,
+    operador INT,
+    instante TIME,
+    unidades INT,
+    
+    PRIMARY KEY(ean, nro, lado, altura, operador, instante),
+    FOREIGN KEY(ean) REFERENCES planograma(ean),
+    FOREIGN KEY(nro) REFERENCES planograma(nro),
+    FOREIGN KEY(lado) REFERENCES planograma(lado),
+    FOREIGN KEY(altura) REFERENCES planograma(altura),
+    FOREIGN KEY(operador) REFERENCES evento_reposicao(operador),
+    FOREIGN KEY(operador) REFERENCES evento_reposicao(instante),
+    
+    CHECK (lado = 'direito' OR lado = 'esquerdo')
+);
