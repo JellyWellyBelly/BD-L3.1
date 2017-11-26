@@ -68,6 +68,22 @@ CREATE TABLE fornecedor (
 	nome VARCHAR(255)
 ); */
 
+CREATE TABLE planograma (
+	ean INT,
+    nro SMALLSERIAL,
+    lado CHAR(3),
+    altura INT,
+    face SMALLINT,
+    unidades SMALLINT,
+    loc INT,
+    
+    PRIMARY KEY(ean, nro, lado, altura),
+    FOREIGN KEY(ean) REFERENCES produto(ean),
+    FOREIGN KEY(nro) REFERENCES prateleira(nro),
+    FOREIGN KEY(lado) REFERENCES prateleira(lado),
+    FOREIGN KEY(altura) REFERENCES prateleira(altura)
+);
+
 CREATE TABLE evento_reposicao (
 	operador INT,
     instante TIME,
@@ -75,10 +91,10 @@ CREATE TABLE evento_reposicao (
     PRIMARY KEY(operador, instante)
 );
 
-CREATE TABLE reposicao ( /* n sei se funcemina :/ */
+CREATE TABLE reposicao (
     ean TEXT,
     nro SMALLSERIAL,
-    lado TEXT,
+    lado CHAR(3),
     altura INT,
     operador INT,
     instante TIME,
@@ -92,5 +108,5 @@ CREATE TABLE reposicao ( /* n sei se funcemina :/ */
     FOREIGN KEY(operador) REFERENCES evento_reposicao(operador),
     FOREIGN KEY(operador) REFERENCES evento_reposicao(instante),
     
-    CHECK (lado = 'direito' OR lado = 'esquerdo')
+    CHECK (lado = 'dir' OR lado = 'esq')
 );
