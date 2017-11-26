@@ -28,9 +28,10 @@ CREATE TABLE categoria (
 );
 
 CREATE TABLE categoria_simples (
-	nome VARCHAR(40) REFERENCES categoria(nome),
+	nome VARCHAR(40),
 	
-	PRIMARY KEY(nome)
+	PRIMARY KEY(nome),
+	FOREIGN KEY(nome) REFERENCES categoria(nome)
 );
 
 CREATE TABLE super_categoria (
