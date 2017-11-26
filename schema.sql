@@ -114,13 +114,11 @@ CREATE TABLE planograma (
     altura NUMERIC(2,2),
     face SMALLINT,
     unidades SMALLINT,
-    loc INT,
-    
+    loc INT, 
+
     PRIMARY KEY(ean, nro, lado, altura),
     FOREIGN KEY(ean) REFERENCES produto(ean),
-    FOREIGN KEY(nro) REFERENCES prateleira(nro),
-    FOREIGN KEY(lado) REFERENCES prateleira(lado),
-    FOREIGN KEY(altura) REFERENCES prateleira(altura)
+    FOREIGN KEY(nro, lado, altura) REFERENCES prateleira(nro, lado, altura)
 );
 
 CREATE TABLE evento_reposicao (
@@ -140,12 +138,8 @@ CREATE TABLE reposicao (
     unidades INT,
     
     PRIMARY KEY(ean, nro, lado, altura, operador, instante),
-    FOREIGN KEY(ean) REFERENCES planograma(ean),
-    FOREIGN KEY(nro) REFERENCES planograma(nro),
-    FOREIGN KEY(lado) REFERENCES planograma(lado),
-    FOREIGN KEY(altura) REFERENCES planograma(altura),
-    FOREIGN KEY(operador) REFERENCES evento_reposicao(operador),
-    FOREIGN KEY(operador) REFERENCES evento_reposicao(instante)
-    
+    FOREIGN KEY(ean, nro, lado, altura) REFERENCES planograma(ean, nro, lado, altura),
+    FOREIGN KEY(operador, instante) REFERENCES evento_reposicao(operador, instante)
+
     /* CHECK (lado = 'dir' OR lado = 'esq') */
 );
