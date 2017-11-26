@@ -34,6 +34,9 @@
 			{
 			    echo("<p>ERROR: {$e->getMessage()}</p>");
 			}
+
+			
+			pg_close($db);
 		?>
 	</body> 
 </html> 
