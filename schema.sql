@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS teste CASCADE;
+-- DROP TABLE IF EXISTS teste CASCADE;
 DROP TABLE IF EXISTS categoria CASCADE;
 DROP TABLE IF EXISTS categoria_simples CASCADE;
 DROP TABLE IF EXISTS super_categoria CASCADE;
@@ -14,12 +14,12 @@ DROP TABLE IF EXISTS reposicao CASCADE;
 
 
 
-CREATE TABLE teste (
-	primario INT,
-	secundario INT NOT NULL,
-	
-	PRIMARY KEY(primario)
-);
+--CREATE TABLE teste (
+--	primario INT,
+--	secundario INT NOT NULL,
+--	
+--	PRIMARY KEY(primario)
+--);
 
 CREATE TABLE categoria (
 	nome VARCHAR(40),
