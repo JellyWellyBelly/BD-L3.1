@@ -11,7 +11,7 @@
 			</p>
 
 			<p>Nome Categoria: <input type="text" name="categoria"> </p>
-			<p>Se for super, insira o nome da categoria à qual é super: <input type="text" name="categoria_inferior"> </p>
+			<p>Se for super, insira o nome da categoria a qual e super: <input type="text" name="categoria_inferior"> </p>
 
 			<p><input type="submit" value="Submeter"/></p>
 			<p> <a href=\"categorias.php\">Cancelar</a> </p>
