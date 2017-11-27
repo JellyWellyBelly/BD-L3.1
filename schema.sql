@@ -31,14 +31,14 @@ CREATE TABLE categoria_simples (
 	nome VARCHAR(40),
 	
 	PRIMARY KEY(nome),
-	FOREIGN KEY(nome) REFERENCES categoria(nome)
+	FOREIGN KEY(nome) REFERENCES categoria(nome) ON DELETE CASCADE
 );
 
 CREATE TABLE super_categoria (
 	nome VARCHAR(40),
 	
 	PRIMARY KEY(nome),
-	FOREIGN KEY(nome) REFERENCES categoria(nome)
+	FOREIGN KEY(nome) REFERENCES categoria(nome) ON DELETE CASCADE
 );
 
 CREATE TABLE constituida (
