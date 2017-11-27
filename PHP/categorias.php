@@ -36,7 +36,7 @@
 			}
 
 			
-			pg_close($db);
+			$db->commit();
 		?>
 	</body> 
 </html> 

@@ -46,11 +46,11 @@
 			}
 			catch (PDOException $e)
 			{
-			echo("<p>ERROR: {$e->getMessage()}</p>");
+				echo("<p>ERROR: {$e->getMessage()}</p>");
 			} 
 
-			
-			pg_close($db);
+
+			$db->commit();
 		?>
 	</body>
 </html>
