@@ -82,7 +82,7 @@ CREATE TABLE fornece_sec(
 
 CREATE TABLE corredor (
 	nro SMALLSERIAL,
-	largura NUMERIC(3,2),
+	largura NUMERIC(5,2),
 
 	PRIMARY KEY(nro)
 );
@@ -90,7 +90,7 @@ CREATE TABLE corredor (
 CREATE TABLE prateleira (
 	nro SMALLSERIAL,
 	lado CHAR(3),
-	altura NUMERIC(2,2),
+	altura NUMERIC(4,2),
 
 	PRIMARY KEY(nro, lado, altura),
 	FOREIGN KEY(nro) REFERENCES corredor(nro)
@@ -102,7 +102,7 @@ CREATE TABLE planograma (
 	ean BIGINT,
     nro SMALLSERIAL,
     lado CHAR(3),
-    altura NUMERIC(2,2),
+    altura NUMERIC(4,2),
     face SMALLINT,
     unidades SMALLINT,
     loc INT, 
@@ -125,7 +125,7 @@ CREATE TABLE reposicao (
     ean BIGINT,
     nro SMALLSERIAL,
     lado CHAR(3),
-    altura NUMERIC(2,2),
+    altura NUMERIC(4,2),
     operador INT,
     instante TIMESTAMP,
     unidades INT,
