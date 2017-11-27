@@ -47,7 +47,9 @@ CREATE TABLE constituida (
 
 	PRIMARY KEY(super_categoria, categoria),
 	FOREIGN KEY(super_categoria) REFERENCES super_categoria(nome),
-	FOREIGN KEY(categoria) REFERENCES categoria(nome)
+	FOREIGN KEY(categoria) REFERENCES categoria(nome),
+
+	CHECK(super_categoria <> categoria)
 );
 
 CREATE TABLE fornecedor (
@@ -67,8 +69,6 @@ CREATE TABLE produto (
 	PRIMARY KEY(ean),
 	FOREIGN KEY(categoria) REFERENCES categoria(nome),
 	FOREIGN KEY(forn_primario) REFERENCES fornecedor(nif)
-
-	/*CHECK ean BETWEEN 0 AND 1000000000*/
 );
 
 CREATE TABLE fornece_sec(
@@ -98,15 +98,6 @@ CREATE TABLE prateleira (
 
 
 
-
-
-
-
-
-
-
-
-
 CREATE TABLE planograma (
 	ean BIGINT,
     nro SMALLSERIAL,
@@ -125,7 +116,9 @@ CREATE TABLE evento_reposicao (
 	operador INT,
     instante TIMESTAMP,
     
-    PRIMARY KEY(operador, instante)
+    PRIMARY KEY(operador, instante),
+    
+    CHECK(instante <= CURRENT_TIMESTAMP)
 );
 
 CREATE TABLE reposicao (
