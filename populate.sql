@@ -14,6 +14,7 @@ TRUNCATE prateleira CASCADE;
 INSERT INTO fornecedor(nif, nome) VALUES (1, 'Fernando');
 INSERT INTO fornecedor(nif, nome) VALUES (2, 'Jorge');
 INSERT INTO fornecedor(nif, nome) VALUES (3, 'Ricardo');
+INSERT INTO fornecedor(nif, nome) VALUES (4, 'Rita');
 
 /* REPOSICOES */
 INSERT INTO evento_reposicao(operador, instante) VALUES (1, TIMESTAMP '1997-01-31 00:57:00');
@@ -37,12 +38,16 @@ INSERT INTO produto(ean, design, categoria, forn_primario, data) VALUES (1, 'ban
 INSERT INTO produto(ean, design, categoria, forn_primario, data) VALUES (2, 'morango', 'fruta', 2, DATE '2015-01-19');
 INSERT INTO produto(ean, design, categoria, forn_primario, data) VALUES (3, 'costeletas', 'carne', 3, DATE '2015-01-19');
 INSERT INTO produto(ean, design, categoria, forn_primario, data) VALUES (4, 'maca', 'degradavel', 3, DATE '2015-01-19');
+INSERT INTO produto(ean, design, categoria, forn_primario, data) VALUES (5, 'alface', 'vegetal', 2, DATE '2015-01-19');
 INSERT INTO fornece_sec(nif, ean) VALUES (2, 1);
 INSERT INTO fornece_sec(nif, ean) VALUES (1, 2);
 INSERT INTO fornece_sec(nif, ean) VALUES (1, 3);
 INSERT INTO fornece_sec(nif, ean) VALUES (1, 4);
+INSERT INTO fornece_sec(nif, ean) VALUES (1, 5);
 INSERT INTO fornece_sec(nif, ean) VALUES (3, 1);
 INSERT INTO fornece_sec(nif, ean) VALUES (3, 2);
+INSERT INTO fornece_sec(nif, ean) VALUES (4, 1);
+INSERT INTO fornece_sec(nif, ean) VALUES (4, 5);
 
 /* MERCADO */
 INSERT INTO corredor(largura) VALUES (13);
