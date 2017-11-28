@@ -5,8 +5,8 @@
 				try
 				{
 				    $host = "db.ist.utl.pt";
-				    $user ="ist426047";
-					$password = "mipz3903";
+				    $user ="ist426002";
+					$password = "mkuc5378";
 				    $dbname = $user;
 
 				    $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
@@ -24,6 +24,7 @@
 				    	echo("<td> {$row['categoria']}     </td>");
 				    	echo("<td> {$row['forn_primario']} </td>");
 				    	echo("<td> {$row['data']}          </td>");
+				    	echo("<td> <a href=\"alterarDesignacao.php?ean={$row['ean']}\"> Alterar Designacao </a> </td>");
 				    	echo("<td> <a href=\"removerProduto.php?ean={$row['ean']}\"> Remover Produto </a> </td>");
 				    	echo("</tr>");
 				    }
