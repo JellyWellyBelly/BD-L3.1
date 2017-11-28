@@ -40,6 +40,7 @@
 			    {
 					echo("<tr>\n");
 					echo("<td>{$row['nome']}</td>\n");
+					echo("<td><a href=\"subCategorias.php?categoria={$row['nome']}\">Listar Sub Categorias</a></td>\n");
 					echo("<td><a href=\"removerCat.php?categoria={$row['nome']}\">Remover</a></td>\n");
 
 					echo("</tr>\n");
