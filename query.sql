@@ -25,19 +25,14 @@ WHERE n_categorias = (SELECT MAX(n_categorias) FROM resultado);
 /* QUERY 2 */
 
 SELECT nif, nome
-FROM (
-    SELECT nif, nome, COUNT(categoria) AS n_categorias
- 	FROM (
-		SELECT categoria, forn_primario AS nif, nome
-		FROM produto
-		NATURAL JOIN categoria_simples AS categoria_simples(categoria)
-		NATURAL JOIN fornecedor AS fornecedor(forn_primario, nome)
-	) AS prods_dos_forn_prim
-	GROUP BY nif, nome
-) AS resultado
-WHERE (n_categorias = (SELECT COUNT(nome) FROM categoria_simples));
-
-
+ FROM (
+	SELECT categoria, forn_primario AS nif, nome
+	FROM produto
+	NATURAL JOIN categoria_simples AS categoria_simples(categoria)
+	NATURAL JOIN fornecedor AS fornecedor(forn_primario, nome)
+) AS prods_dos_forn_prim
+GROUP BY nif, nome
+HAVING (COUNT(nome) = (SELECT COUNT(nome) FROM categoria_simples));
 
 /* QUERY 3 */
 
@@ -48,6 +43,20 @@ WHERE NOT EXISTS (
 	FROM reposicao 
 	WHERE produto.ean = reposicao.ean);
 
-
-
 /* QUERY 4 */
+
+SELECT ean
+FROM (
+	SELECT ean, nif
+	FROM produto
+	NATURAL JOIN fornece_sec
+	NATURAL JOIN fornecedor) AS n_forn_sec_por_prod
+GROUP BY ean
+HAVING COUNT(nif) > 10;
+
+/* QUERY 5 */
+
+SELECT ean
+FROM reposicao
+GROUP BY ean
+HAVING COUNT(DISTINCT operador) = 1;

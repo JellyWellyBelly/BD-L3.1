@@ -15,12 +15,14 @@ INSERT INTO fornecedor(nif, nome) VALUES (1, 'Fernando');
 INSERT INTO fornecedor(nif, nome) VALUES (2, 'Jorge');
 INSERT INTO fornecedor(nif, nome) VALUES (3, 'Ricardo');
 INSERT INTO fornecedor(nif, nome) VALUES (4, 'Rita');
-
-/* REPOSICOES */
-INSERT INTO evento_reposicao(operador, instante) VALUES (1, TIMESTAMP '1997-01-31 00:57:00');
-INSERT INTO evento_reposicao(operador, instante) VALUES (2, TIMESTAMP '1997-02-01 00:00:00');
-INSERT INTO evento_reposicao(operador, instante) VALUES (1, TIMESTAMP '1997-01-31 10:00:00');
-INSERT INTO evento_reposicao(operador, instante) VALUES (2, TIMESTAMP '1997-02-01 10:57:00');
+INSERT INTO fornecedor(nif, nome) VALUES (5, 'Anastacia');
+INSERT INTO fornecedor(nif, nome) VALUES (6, 'Luis');
+INSERT INTO fornecedor(nif, nome) VALUES (7, 'Ana');
+INSERT INTO fornecedor(nif, nome) VALUES (8, 'Lucia');
+INSERT INTO fornecedor(nif, nome) VALUES (9, 'Marta');
+INSERT INTO fornecedor(nif, nome) VALUES (10, 'Pedro');
+INSERT INTO fornecedor(nif, nome) VALUES (11, 'Joaquim');
+INSERT INTO fornecedor(nif, nome) VALUES (12, 'Miguel');
 
 /* CATEGORIAS/PRODUTOS */
 INSERT INTO categoria(nome) VALUES ('fruta');
@@ -39,15 +41,72 @@ INSERT INTO produto(ean, design, categoria, forn_primario, data) VALUES (2, 'mor
 INSERT INTO produto(ean, design, categoria, forn_primario, data) VALUES (3, 'costeletas', 'carne', 3, DATE '2015-01-19');
 INSERT INTO produto(ean, design, categoria, forn_primario, data) VALUES (4, 'maca', 'degradavel', 3, DATE '2015-01-19');
 INSERT INTO produto(ean, design, categoria, forn_primario, data) VALUES (5, 'alface', 'vegetal', 2, DATE '2015-01-19');
-INSERT INTO fornece_sec(nif, ean) VALUES (2, 1);
+INSERT INTO produto(ean, design, categoria, forn_primario, data) VALUES (6, 'cenoura', 'vegetal', 5, DATE '2016-01-19');
+INSERT INTO produto(ean, design, categoria, forn_primario, data) VALUES (7, 'couve', 'vegetal', 5, DATE '2016-01-19');
+INSERT INTO produto(ean, design, categoria, forn_primario, data) VALUES (8, 'beterraba', 'vegetal', 5, DATE '2016-01-19');
+INSERT INTO produto(ean, design, categoria, forn_primario, data) VALUES (9, 'milho', 'vegetal', 5, DATE '2016-01-19');
+INSERT INTO produto(ean, design, categoria, forn_primario, data) VALUES (10, 'berinjela', 'vegetal', 5, DATE '2016-01-19');
+INSERT INTO produto(ean, design, categoria, forn_primario, data) VALUES (11, 'linguica', 'carne', 5, DATE '2016-01-19');
+INSERT INTO produto(ean, design, categoria, forn_primario, data) VALUES (12, 'torresmo', 'carne', 5, DATE '2016-01-19');
+INSERT INTO produto(ean, design, categoria, forn_primario, data) VALUES (13, 'peru', 'carne', 5, DATE '2016-01-19');
+INSERT INTO produto(ean, design, categoria, forn_primario, data) VALUES (14, 'entrecosto', 'carne', 5, DATE '2016-01-19');
+INSERT INTO produto(ean, design, categoria, forn_primario, data) VALUES (15, 'febra', 'carne', 5, DATE '2016-01-19');
+
 INSERT INTO fornece_sec(nif, ean) VALUES (1, 2);
-INSERT INTO fornece_sec(nif, ean) VALUES (1, 3);
 INSERT INTO fornece_sec(nif, ean) VALUES (1, 4);
-INSERT INTO fornece_sec(nif, ean) VALUES (1, 5);
+INSERT INTO fornece_sec(nif, ean) VALUES (1, 6);
+INSERT INTO fornece_sec(nif, ean) VALUES (1, 8);
+INSERT INTO fornece_sec(nif, ean) VALUES (1, 10);
+INSERT INTO fornece_sec(nif, ean) VALUES (1, 11);
+INSERT INTO fornece_sec(nif, ean) VALUES (1, 12);
+INSERT INTO fornece_sec(nif, ean) VALUES (1, 13);
+INSERT INTO fornece_sec(nif, ean) VALUES (1, 14);
+INSERT INTO fornece_sec(nif, ean) VALUES (1, 15);
+INSERT INTO fornece_sec(nif, ean) VALUES (2, 1);
+INSERT INTO fornece_sec(nif, ean) VALUES (2, 3);
+INSERT INTO fornece_sec(nif, ean) VALUES (2, 5);
+INSERT INTO fornece_sec(nif, ean) VALUES (2, 7);
+INSERT INTO fornece_sec(nif, ean) VALUES (2, 9);
+INSERT INTO fornece_sec(nif, ean) VALUES (2, 11);
+INSERT INTO fornece_sec(nif, ean) VALUES (2, 12);
+INSERT INTO fornece_sec(nif, ean) VALUES (2, 13);
+INSERT INTO fornece_sec(nif, ean) VALUES (2, 14);
+INSERT INTO fornece_sec(nif, ean) VALUES (2, 15);
 INSERT INTO fornece_sec(nif, ean) VALUES (3, 1);
-INSERT INTO fornece_sec(nif, ean) VALUES (3, 2);
+INSERT INTO fornece_sec(nif, ean) VALUES (3, 10);
+INSERT INTO fornece_sec(nif, ean) VALUES (3, 11);
+INSERT INTO fornece_sec(nif, ean) VALUES (3, 12);
+INSERT INTO fornece_sec(nif, ean) VALUES (3, 13);
+INSERT INTO fornece_sec(nif, ean) VALUES (3, 14);
+INSERT INTO fornece_sec(nif, ean) VALUES (3, 15);
 INSERT INTO fornece_sec(nif, ean) VALUES (4, 1);
+INSERT INTO fornece_sec(nif, ean) VALUES (4, 2);
+INSERT INTO fornece_sec(nif, ean) VALUES (4, 3);
+INSERT INTO fornece_sec(nif, ean) VALUES (4, 4);
 INSERT INTO fornece_sec(nif, ean) VALUES (4, 5);
+INSERT INTO fornece_sec(nif, ean) VALUES (4, 6);
+INSERT INTO fornece_sec(nif, ean) VALUES (4, 7);
+INSERT INTO fornece_sec(nif, ean) VALUES (4, 8);
+INSERT INTO fornece_sec(nif, ean) VALUES (4, 9);
+INSERT INTO fornece_sec(nif, ean) VALUES (4, 10);
+INSERT INTO fornece_sec(nif, ean) VALUES (4, 11);
+INSERT INTO fornece_sec(nif, ean) VALUES (4, 12);
+INSERT INTO fornece_sec(nif, ean) VALUES (4, 13);
+INSERT INTO fornece_sec(nif, ean) VALUES (4, 14);
+INSERT INTO fornece_sec(nif, ean) VALUES (4, 15);
+INSERT INTO fornece_sec(nif, ean) VALUES (6, 11);
+INSERT INTO fornece_sec(nif, ean) VALUES (7, 11);
+INSERT INTO fornece_sec(nif, ean) VALUES (8, 11);
+INSERT INTO fornece_sec(nif, ean) VALUES (9, 11);
+INSERT INTO fornece_sec(nif, ean) VALUES (10, 11);
+INSERT INTO fornece_sec(nif, ean) VALUES (11, 11);
+INSERT INTO fornece_sec(nif, ean) VALUES (12, 11);
+INSERT INTO fornece_sec(nif, ean) VALUES (6, 15);
+INSERT INTO fornece_sec(nif, ean) VALUES (7, 15);
+INSERT INTO fornece_sec(nif, ean) VALUES (8, 15);
+INSERT INTO fornece_sec(nif, ean) VALUES (9, 15);
+INSERT INTO fornece_sec(nif, ean) VALUES (10, 15);
+INSERT INTO fornece_sec(nif, ean) VALUES (11, 15);
 
 /* MERCADO */
 INSERT INTO corredor(largura) VALUES (13);
@@ -56,7 +115,16 @@ INSERT INTO prateleira(nro, lado, altura) VALUES (1, 'dir', 2.00);
 INSERT INTO prateleira(nro, lado, altura) VALUES (2, 'dir', 2.00);
 INSERT INTO planograma(ean, nro, lado, altura, face, unidades, loc) VALUES (1, 1, 'dir', 2.00, 1, 1337, 1);
 INSERT INTO planograma(ean, nro, lado, altura, face, unidades, loc) VALUES (2, 2, 'dir', 2.00, 1, 1337, 1);
+INSERT INTO planograma(ean, nro, lado, altura, face, unidades, loc) VALUES (1, 2, 'dir', 2.00, 1, 1337, 1);
 
-/* REPOSICAO */
+/* REPOSICOES */
+INSERT INTO evento_reposicao(operador, instante) VALUES (1, TIMESTAMP '1997-01-31 00:57:00');
+INSERT INTO evento_reposicao(operador, instante) VALUES (2, TIMESTAMP '1997-02-01 00:00:00');
+INSERT INTO evento_reposicao(operador, instante) VALUES (1, TIMESTAMP '1997-01-31 10:00:00');
+INSERT INTO evento_reposicao(operador, instante) VALUES (2, TIMESTAMP '1997-02-01 10:57:00');
+INSERT INTO evento_reposicao(operador, instante) VALUES (2, TIMESTAMP '1997-02-01 01:00:00');
+
 INSERT INTO reposicao VALUES (1, 1,'dir',2.00,1,TIMESTAMP '1997-01-31 00:57:00',1337);
 INSERT INTO reposicao VALUES (2, 2,'dir',2.00,2,TIMESTAMP '1997-02-01 00:00:00',1337);
+INSERT INTO reposicao VALUES (1, 2,'dir',2.00,2,TIMESTAMP '1997-02-01 00:00:00',1337);
+INSERT INTO reposicao VALUES (2, 2,'dir',2.00,2,TIMESTAMP '1997-02-01 01:00:00',1337);
