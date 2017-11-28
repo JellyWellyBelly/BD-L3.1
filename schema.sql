@@ -76,8 +76,8 @@ CREATE TABLE fornece_sec(
 	ean BIGINT,
 
 	PRIMARY KEY(nif, ean),
-	FOREIGN KEY(nif) REFERENCES fornecedor(nif),
-	FOREIGN KEY(ean) REFERENCES produto(ean)
+	FOREIGN KEY(nif) REFERENCES fornecedor(nif) ON DELETE CASCADE,
+	FOREIGN KEY(ean) REFERENCES produto(ean) ON DELETE CASCADE
 );
 
 CREATE TABLE corredor (
@@ -93,7 +93,7 @@ CREATE TABLE prateleira (
 	altura NUMERIC(4,2),
 
 	PRIMARY KEY(nro, lado, altura),
-	FOREIGN KEY(nro) REFERENCES corredor(nro)
+	FOREIGN KEY(nro) REFERENCES corredor(nro) ON DELETE CASCADE
 );
 
 
@@ -108,8 +108,8 @@ CREATE TABLE planograma (
     loc INT, 
 
     PRIMARY KEY(ean, nro, lado, altura),
-    FOREIGN KEY(ean) REFERENCES produto(ean),
-    FOREIGN KEY(nro, lado, altura) REFERENCES prateleira(nro, lado, altura)
+    FOREIGN KEY(ean) REFERENCES produto(ean) ON DELETE CASCADE,
+    FOREIGN KEY(nro, lado, altura) REFERENCES prateleira(nro, lado, altura) ON DELETE CASCADE
 );
 
 CREATE TABLE evento_reposicao (
@@ -131,8 +131,8 @@ CREATE TABLE reposicao (
     unidades INT,
     
     PRIMARY KEY(ean, nro, lado, altura, operador, instante),
-    FOREIGN KEY(ean, nro, lado, altura) REFERENCES planograma(ean, nro, lado, altura),
-    FOREIGN KEY(operador, instante) REFERENCES evento_reposicao(operador, instante)
+    FOREIGN KEY(ean, nro, lado, altura) REFERENCES planograma(ean, nro, lado, altura) ON DELETE NO ACTION,
+    FOREIGN KEY(operador, instante) REFERENCES evento_reposicao(operador, instante) ON DELETE NO ACTION
 
     /* CHECK (lado = 'dir' OR lado = 'esq') */
 );
