@@ -57,6 +57,8 @@ CREATE TABLE fornecedor (
 	nome VARCHAR(255),
 
 	PRIMARY KEY (nif)
+
+	CHECK(nif >= 100 000 000 AND nif <= 999 999 999)
 );
 
 CREATE TABLE produto (
@@ -69,6 +71,8 @@ CREATE TABLE produto (
 	PRIMARY KEY(ean),
 	FOREIGN KEY(categoria) REFERENCES categoria(nome),
 	FOREIGN KEY(forn_primario) REFERENCES fornecedor(nif)
+
+	CHECK(ean >= 100 000 000 0000 AND ean <= 999 999 999 9999)
 );
 
 CREATE TABLE fornece_sec(
@@ -94,6 +98,8 @@ CREATE TABLE prateleira (
 
 	PRIMARY KEY(nro, lado, altura),
 	FOREIGN KEY(nro) REFERENCES corredor(nro) ON DELETE CASCADE
+
+	CHECK (lado = 'dir' OR lado = 'esq')
 );
 
 
@@ -105,15 +111,16 @@ CREATE TABLE planograma (
     altura NUMERIC(4,2),
     face SMALLINT,
     unidades SMALLINT,
-    loc INT, 
+    loc SMALLINT, 
 
     PRIMARY KEY(ean, nro, lado, altura),
     FOREIGN KEY(ean) REFERENCES produto(ean) ON DELETE CASCADE,
     FOREIGN KEY(nro, lado, altura) REFERENCES prateleira(nro, lado, altura) ON DELETE CASCADE
+
 );
 
 CREATE TABLE evento_reposicao (
-	operador INT,
+	operador SMALLINT,
     instante TIMESTAMP,
     
     PRIMARY KEY(operador, instante),
@@ -128,11 +135,10 @@ CREATE TABLE reposicao (
     altura NUMERIC(4,2),
     operador INT,
     instante TIMESTAMP,
-    unidades INT,
+    unidades SMALLINT,
     
     PRIMARY KEY(ean, nro, lado, altura, operador, instante),
     FOREIGN KEY(ean, nro, lado, altura) REFERENCES planograma(ean, nro, lado, altura) ON DELETE NO ACTION,
     FOREIGN KEY(operador, instante) REFERENCES evento_reposicao(operador, instante) ON DELETE NO ACTION
 
-    /* CHECK (lado = 'dir' OR lado = 'esq') */
 );
