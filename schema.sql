@@ -38,8 +38,8 @@ CREATE TABLE constituida (
 	categoria VARCHAR(40),
 
 	PRIMARY KEY(super_categoria, categoria),
-	FOREIGN KEY(super_categoria) REFERENCES super_categoria(nome),
-	FOREIGN KEY(categoria) REFERENCES categoria(nome),
+	FOREIGN KEY(super_categoria) REFERENCES super_categoria(nome) ON DELETE CASCADE,
+	FOREIGN KEY(categoria) REFERENCES categoria(nome) ON DELETE CASCADE,
 
 	CHECK(super_categoria <> categoria)
 );
@@ -48,7 +48,9 @@ CREATE TABLE fornecedor (
 	nif NUMERIC(9,0),
 	nome VARCHAR(255),
 
-	PRIMARY KEY (nif)
+	PRIMARY KEY (nif),
+
+	CHECK (nif > 0)
 );
 
 CREATE TABLE produto (
@@ -59,8 +61,10 @@ CREATE TABLE produto (
 	data DATE,
 
 	PRIMARY KEY(ean),
-	FOREIGN KEY(categoria) REFERENCES categoria(nome),
-	FOREIGN KEY(forn_primario) REFERENCES fornecedor(nif)
+	FOREIGN KEY(categoria) REFERENCES categoria(nome) ON DELETE CASCADE, --Quando uma categoria eh apagada os produtos desaparecem tambem 
+	FOREIGN KEY(forn_primario) REFERENCES fornecedor(nif) ON DELETE CASCADE, --Com a falta de um fornecedor primario eh eliminado o produto da DB
+
+	CHECK (ean > 0)
 );
 
 CREATE TABLE fornece_sec(
@@ -76,7 +80,9 @@ CREATE TABLE corredor (
 	nro SMALLINT,
 	largura NUMERIC(5,2),
 
-	PRIMARY KEY(nro)
+	PRIMARY KEY(nro),
+
+	CHECK (nro > 0)
 );
 
 CREATE TABLE prateleira (
@@ -102,7 +108,11 @@ CREATE TABLE planograma (
 
     PRIMARY KEY(ean, nro, lado, altura),
     FOREIGN KEY(ean) REFERENCES produto(ean) ON DELETE CASCADE,
-    FOREIGN KEY(nro, lado, altura) REFERENCES prateleira(nro, lado, altura) ON DELETE CASCADE
+    FOREIGN KEY(nro, lado, altura) REFERENCES prateleira(nro, lado, altura) ON DELETE CASCADE,
+
+    CHECK (face > 0),
+    CHECK (unidades > 0),
+    CHECK (loc > 0)
 );
 
 CREATE TABLE evento_reposicao (
@@ -111,7 +121,8 @@ CREATE TABLE evento_reposicao (
     
     PRIMARY KEY(operador, instante),
     
-    CHECK(instante <= CURRENT_TIMESTAMP)
+    CHECK (instante <= CURRENT_TIMESTAMP),
+    CHECK (operador > 0)
 );
 
 CREATE TABLE reposicao (
@@ -125,5 +136,7 @@ CREATE TABLE reposicao (
     
     PRIMARY KEY(ean, nro, lado, altura, operador, instante),
     FOREIGN KEY(ean, nro, lado, altura) REFERENCES planograma(ean, nro, lado, altura) ON DELETE CASCADE,
-    FOREIGN KEY(operador, instante) REFERENCES evento_reposicao(operador, instante) ON DELETE CASCADE
+    FOREIGN KEY(operador, instante) REFERENCES evento_reposicao(operador, instante) ON DELETE CASCADE,
+
+    CHECK (unidades > 0) -- Queremos que seja positivo, porque nao achamos logico repor unidades negativas
 );
