@@ -6,8 +6,8 @@
 			try
 			{
 				$host = "db.ist.utl.pt";
-				$user ="ist426002";
-				$password = "mkuc5378";
+				$user ="ist426047";
+				$password = "mipz3903";
 				$dbname = $user;
 				$db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
 				$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
@@ -31,7 +31,6 @@
 
 						if ($row['super_categoria'] == $super) {
 							$subs = get_sub_categoria($row['categoria'], $subs, $result, $size);
-							//array_push($subs, $row['categoria']);
 							$temp = array($row['categoria']);
 							$subs = array_merge($temp, $subs);
 						}
@@ -44,21 +43,30 @@
 				$subs = get_sub_categoria($categoria, $subs, $table, $size);
 				$subs = array_unique($subs);
 
-				echo("<table border=\"1\" cellspacing=\"5\">\n");
+				
+				$table_height = 0;
+				echo("<table cellspacing=\"5\">\n");
 			    echo "Sub Categorias";
 				foreach ($subs as &$value) {
+					$table_height++;
 					echo("<tr>\n");
 					echo("<td>$value</td>\n");
 					echo("</tr>\n");
 				}
 				echo("</table>\n");
 				
+				if ($table_height == 0) {
+					echo("<p> Nenhum resultado encontrado. </p>");
+				}
+	
 				$db = null;
 			}
 			catch (PDOException $e)
 			{
 				echo("<p>ERROR: {$e->getMessage()}</p>");
 			} 
+
+			echo("<p> <a href='categorias.php'> Voltar 'a lista de categorias </a> </p>");
 
 		?>
 	</body>

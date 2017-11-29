@@ -12,18 +12,21 @@
 				$db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
 				$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
 
-				$sql1 = "DELETE FROM produto WHERE ean = '$ean';";
+				$sql1 = "DELETE FROM produto WHERE ean = $ean;";
 
-				echo("<p>$sql1</p>"); 
 				$db->query($sql1);
 
+				echo("<p>Remocao efetuada com sucesso!</p>");
+				
 				$db = null;
 			}
 			catch (PDOException $e)
 			{
+				echo("<p>Erro inesperado, nao foi possivel determinar a causa.</p>");
 				echo("<p>ERROR: {$e->getMessage()}</p>");
 			} 
 
+			echo("<p> <a href='produto.php'> Voltar 'a lista de produtos </a> </p>");
 		?>
 	</body>
 </html>

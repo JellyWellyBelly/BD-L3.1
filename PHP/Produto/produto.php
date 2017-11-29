@@ -1,12 +1,12 @@
 <html>
 	<body>
-		<h3>
+		<h3>Produtos
 			<?php
 				try
 				{
 				    $host = "db.ist.utl.pt";
-				    $user ="ist426002";
-					$password = "mkuc5378";
+				    $user ="ist426047";
+					$password = "mipz3903";
 				    $dbname = $user;
 
 				    $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
@@ -25,12 +25,14 @@
 				    	echo("<td> {$row['forn_primario']} </td>");
 				    	echo("<td> {$row['data']}          </td>");
 				    	echo("<td> <a href=\"alterarDesignacao.php?ean={$row['ean']}\"> Alterar Designacao </a> </td>");
+				    	echo("<td> <a href=\"verFornecedorSecundario.php?ean={$row['ean']}\"> Listar Fornecedores Secundarios </a> </td>");
 				    	echo("<td> <a href=\"removerProduto.php?ean={$row['ean']}\"> Remover Produto </a> </td>");
 				    	echo("</tr>");
 				    }
 				    echo("</table>");
 
 				    echo("<a href=\"inserirProduto.php?ean={$row['ean']} & design={$row['design']} & categoria={$row['categoria']} & forn_primario={$row['forn_primario']} & data={$row['data']} &\"> Inserir Produto </a>");
+
 
 				    $db = null;
 				}
@@ -39,6 +41,7 @@
 				    echo("<p>ERROR: {$e->getMessage()}</p>");
 				}
 
+				echo("<p> <a href='..\index.html'> Voltar 'a pagina principal </a> </p>");
 			?>
 		</h3>
 	</body> 

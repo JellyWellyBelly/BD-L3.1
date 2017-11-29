@@ -5,16 +5,16 @@
 			try
 			{
 			    $host = "db.ist.utl.pt";
-			    $user ="ist426002";
-				$password = "mkuc5378";
+			    $user ="ist426047";
+				$password = "mipz3903";
 			    $dbname = $user;
 
 			    $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
 			    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 			    $sql = "SELECT nome FROM categoria_simples;";
-
 			    $result = $db->query($sql);
+
 			    echo("<table border=\"1\" cellspacing=\"5\">\n");
 			    echo "Categorias Simples";
 			    foreach($result as $row)
@@ -22,27 +22,23 @@
 					echo("<tr>\n");
 					echo("<td>{$row['nome']}</td>\n");
 					echo("<td><a href=\"removerCat.php?categoria={$row['nome']}\">Remover</a></td>\n");
-
 					echo("</tr>\n");
 			    }
 			    echo("</table>\n");
-
 			    echo ("<br> </br>");
 
 
 			    $sql = "SELECT nome FROM super_categoria;";
-
 			    $result = $db->query($sql);
 
 			    echo("<table border=\"1\" cellspacing=\"5\">\n");
-			     echo "Super Categorias";
+			    echo "Super Categorias";
 			    foreach($result as $row)
 			    {
 					echo("<tr>\n");
 					echo("<td>{$row['nome']}</td>\n");
 					echo("<td><a href=\"subCategorias.php?categoria={$row['nome']}\">Listar Sub Categorias</a></td>\n");
 					echo("<td><a href=\"removerCat.php?categoria={$row['nome']}\">Remover</a></td>\n");
-
 					echo("</tr>\n");
 			    }
 			    echo("</table>\n");
@@ -56,6 +52,8 @@
 			{
 			    echo("<p>ERROR: {$e->getMessage()}</p>");
 			}
+			
+			echo("<p> <a href='..\index.html'> Voltar 'a pagina principal </a> </p>");
 
 		?>
 	</body> 
