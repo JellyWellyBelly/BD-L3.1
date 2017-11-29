@@ -41,7 +41,8 @@ FROM produto
 WHERE NOT EXISTS (
     SELECT ean
 	FROM reposicao 
-	WHERE produto.ean = reposicao.ean);
+	WHERE produto.ean = reposicao.ean
+);
 
 /* QUERY 4 */
 
@@ -50,7 +51,8 @@ FROM (
 	SELECT ean, nif
 	FROM produto
 	NATURAL JOIN fornece_sec
-	NATURAL JOIN fornecedor) AS n_forn_sec_por_prod
+	NATURAL JOIN fornecedor
+) AS n_forn_sec_por_prod
 GROUP BY ean
 HAVING COUNT(nif) > 10;
 
