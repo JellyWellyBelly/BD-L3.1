@@ -20,8 +20,6 @@ SELECT nome
 FROM resultado
 WHERE n_categorias = (SELECT MAX(n_categorias) FROM resultado);
 
-
-
 /* QUERY 2 */
 
 SELECT nif, nome
