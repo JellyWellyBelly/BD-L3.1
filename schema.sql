@@ -138,7 +138,7 @@ CREATE TABLE reposicao (
     unidades SMALLINT,
     
     PRIMARY KEY(ean, nro, lado, altura, operador, instante),
-    FOREIGN KEY(ean, nro, lado, altura) REFERENCES planograma(ean, nro, lado, altura) ON DELETE NO ACTION,
-    FOREIGN KEY(operador, instante) REFERENCES evento_reposicao(operador, instante) ON DELETE NO ACTION
+    FOREIGN KEY(ean, nro, lado, altura) REFERENCES planograma(ean, nro, lado, altura) ON DELETE CASCADE,
+    FOREIGN KEY(operador, instante) REFERENCES evento_reposicao(operador, instante) ON DELETE CASCADE
 
 );
