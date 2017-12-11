@@ -57,7 +57,7 @@ CREATE TABLE produto (
 	ean NUMERIC(13,0),
 	design TEXT,
 	categoria VARCHAR(40),
-	forn_primario INT,
+	forn_primario NUMERIC(9,0),
 	data DATE,
 
 	PRIMARY KEY(ean),
