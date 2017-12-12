@@ -10,6 +10,9 @@ DROP TABLE IF EXISTS prateleira CASCADE;
 DROP TABLE IF EXISTS planograma CASCADE;
 DROP TABLE IF EXISTS evento_reposicao CASCADE;
 DROP TABLE IF EXISTS reposicao CASCADE;
+DROP TABLE IF EXISTS reposicoes_facts CASCADE;
+DROP TABLE IF EXISTS d_tempo CASCADE;
+DROP TABLE IF EXISTS d_produto CASCADE;
 
 
 
@@ -182,7 +185,7 @@ CREATE TABLE reposicoes_facts(
 	PRIMARY KEY(cean, dia, mes, ano),
 
 	FOREIGN KEY(cean) REFERENCES d_produto(cean),
-	FOREIGN KEY(dia, mes, ano) REFERENCES d_produto(dia, mes, ano)
+	FOREIGN KEY(dia, mes, ano) REFERENCES d_tempo(dia, mes, ano)
 
 );
 
