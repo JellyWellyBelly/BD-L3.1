@@ -117,11 +117,11 @@ CREATE TABLE planograma (
 
 CREATE TABLE evento_reposicao (
 	operador SMALLINT,
-    instante TIMESTAMP,
+    instante TIME,
     
     PRIMARY KEY(operador, instante),
     
-    CHECK (instante <= CURRENT_TIMESTAMP),
+    CHECK (instante <= CURRENT_TIME),
     CHECK (operador > 0)
 );
 
@@ -131,7 +131,7 @@ CREATE TABLE reposicao (
     lado CHAR(3),
     altura VARCHAR(5),
     operador SMALLINT,
-    instante TIMESTAMP,
+    instante TIME,
     unidades SMALLINT,
     
     PRIMARY KEY(ean, nro, lado, altura, operador, instante),
@@ -139,4 +139,48 @@ CREATE TABLE reposicao (
     FOREIGN KEY(operador, instante) REFERENCES evento_reposicao(operador, instante) ON DELETE CASCADE,
 
     CHECK (unidades > 0) -- Queremos que seja positivo, porque nao achamos logico repor unidades negativas
+);
+
+-- Estrela --
+CREATE TABLE d_produto(
+	cean Numeric(13,0), 
+	categoria VARCHAR(40), 
+	nif_fornecedor_principal Numeric(9,0),
+
+	PRIMARY KEY(cean)
+);
+
+CREATE TABLE d_tempo(
+	dia Numeric(2,0), 
+	mes Numeric(2,0), 
+	ano Numeric(4,0),
+
+	PRIMARY KEY(dia, mes, ano),
+
+	CHECK (dia >= 1 AND dia <= 31 AND mes = 1, 3, 5, 7, 9, 11),
+	CHECK (dia >= 1 AND dia <= 30 AND mes = 4, 6, 8, 10, 12),
+	CHECK (dia >= 1 AND dia <= 28 AND mes = 2)
+);
+
+
+CREATE TABLE reposicoes_facts(
+	cean Numeric(13,0),
+	dia Numeric(2,0), 
+	mes Numeric(2,0), 
+	ano Numeric(4,0),
+
+	-- measures --
+
+	nro SMALLINT,
+    lado CHAR(3),
+    altura VARCHAR(5),
+    operador SMALLINT,
+    instante TIME,
+
+	PRIMARY KEY(cean, dia, mes, ano),
+
+	FOREIGN KEY(cean) REFERENCES d_produto(cean),
+	FOREIGN KEY(dia, mes, ano) REFERENCES d_produto(dia, mes, ano),
+	FOREIGN KEY(nro, lado, altura, operador, instante) REFERENCES reposicao(nro, lado, altura, operador, instante)
+
 );
