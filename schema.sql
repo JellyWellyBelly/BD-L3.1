@@ -198,7 +198,7 @@ BEGIN
         SELECT forn_primario, ean
         FROM produto
         WHERE NEW.ean = produto.ean AND NEW.nif = produto.forn_primario) THEN
-		raise exception 'O fornecedor % ja e fornecedor primario do produto %', NEW.nif, NEW.ean;
+		RAISE EXCEPTION 'O fornecedor % ja e fornecedor primario do produto %', NEW.nif, NEW.ean;
 	END IF;
 	RETURN NEW;
 END
@@ -217,7 +217,7 @@ BEGIN
         SELECT nif, ean
         FROM fornece_sec
         WHERE NEW.ean = fornece_sec.ean AND fornece_sec.nif = NEW.forn_primario) THEN
-		raise exception 'O fornecedor % ja e fornecedor secundario do produto %', NEW.forn_primario, NEW.ean;
+		RAISE EXCEPTION 'O fornecedor % ja e fornecedor secundario do produto %', NEW.forn_primario, NEW.ean;
 	END IF;
 	RETURN NEW;
 END
