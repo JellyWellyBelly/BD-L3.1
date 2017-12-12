@@ -189,6 +189,8 @@ CREATE TABLE reposicoes_facts(
 
 ---- TRIGGER ----
 
+---- TRIGGERS ----
+
 CREATE OR REPLACE FUNCTION cancel_fornece_sec_proc() 
 	RETURNS TRIGGER AS $$
 BEGIN
@@ -203,6 +205,25 @@ END
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER cancel_fornece_sec
-	AFTER INSERT ON fornece_sec
+    AFTER INSERT OR UPDATE ON fornece_sec
 	FOR EACH ROW
 	EXECUTE PROCEDURE cancel_fornece_sec_proc();
+
+
+CREATE OR REPLACE FUNCTION cancel_produto_proc() 
+	RETURNS TRIGGER AS $$
+BEGIN
+    IF EXISTS(
+        SELECT nif, ean
+        FROM fornece_sec
+        WHERE NEW.ean = fornece_sec.ean AND fornece_sec.nif = NEW.forn_primario) THEN
+		raise exception 'O fornecedor % ja e fornecedor secundario do produto %', NEW.forn_primario, NEW.ean;
+	END IF;
+	RETURN NEW;
+END
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER cancel_produto
+    AFTER UPDATE ON produto
+	FOR EACH ROW
+	EXECUTE PROCEDURE cancel_produto_proc();
