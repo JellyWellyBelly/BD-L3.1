@@ -1,3 +1,30 @@
+-- Populate --
+
+
+INSERT INTO d_produto(cean, categoria, nif_fornecedor_principal) 
+SELECT ean, categoria, forn_primario
+FROM produto;
+
+INSERT INTO d_tempo(dia, mes, ano) 
+SELECT DISTINCT EXTRACT(DAY FROM instante),
+		EXTRACT(MONTH FROM instante),
+		EXTRACT(YEAR FROM instante)
+FROM reposicao;
+
+INSERT INTO reposicoes_facts(cean, dia, mes, ano, unidades_repostas)
+SELECT DISTINCT ean, -- DISTINCT porque usamos TIMESTAMP na reposicao sendo assim possivel repor duas vezes o mesmo produto no mesmo dia
+	   EXTRACT(DAY FROM instante),
+	   EXTRACT(MONTH FROM instante),
+	   EXTRACT(YEAR FROM instante),
+	   unidades
+FROM reposicao;
+
+
+
+-- Schema --
+
+
+
 CREATE TABLE d_produto(
 	cean Numeric(13,0), 
 	categoria VARCHAR(40), 
@@ -13,9 +40,7 @@ CREATE TABLE d_tempo(
 
 	PRIMARY KEY(dia, mes, ano),
 
-	CHECK (dia >= 1 AND dia <= 31 AND mes IN (1, 3, 5, 7, 9, 11)),
-	CHECK (dia >= 1 AND dia <= 30 AND mes IN (4, 6, 8, 10, 12)),
-	CHECK (dia >= 1 AND dia <= 28 AND mes = 2)
+	CHECK (dia >= 1 AND dia <= 31 AND mes IN (1, 3, 5, 7, 9, 11) OR (dia >= 1 AND dia <= 30 AND mes IN (4, 6, 8, 10, 12)) OR (dia >= 1 AND dia <= 28 AND mes = 2))
 );
 
 
@@ -26,24 +51,20 @@ CREATE TABLE reposicoes_facts(
 	ano Numeric(4,0),
 
 	-- measures --
-
-	nro SMALLINT,
-    lado CHAR(3),
-    altura VARCHAR(5),
-    operador SMALLINT,
-    instante TIME,
-    unidades SMALLINT,
+	
+    unidades_repostas SMALLINT,
 
 	PRIMARY KEY(cean, dia, mes, ano),
 
 	FOREIGN KEY(cean) REFERENCES d_produto(cean),
-	FOREIGN KEY(dia, mes, ano) REFERENCES d_produto(dia, mes, ano)
+	FOREIGN KEY(dia, mes, ano) REFERENCES d_tempo(dia, mes, ano)
 
 );
 
 
 
 -- OLAP --
+
 WITH TEMP AS (SELECT ean, categoria, mes, ano 
 		     FROM reposicoes_facts NATURAL JOIN d_produto
 		     WHERE nif_fornecedor_principal = 123455678)
