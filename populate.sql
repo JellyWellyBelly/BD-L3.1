@@ -95,7 +95,7 @@ INSERT INTO fornece_sec(nif, ean) VALUES (1, 14);
 INSERT INTO fornece_sec(nif, ean) VALUES (1, 15);
 INSERT INTO fornece_sec(nif, ean) VALUES (2, 1);
 INSERT INTO fornece_sec(nif, ean) VALUES (2, 3);
-INSERT INTO fornece_sec(nif, ean) VALUES (2, 5);
+--INSERT INTO fornece_sec(nif, ean) VALUES (2, 5); -- TA MAL
 INSERT INTO fornece_sec(nif, ean) VALUES (2, 7);
 INSERT INTO fornece_sec(nif, ean) VALUES (2, 9);
 INSERT INTO fornece_sec(nif, ean) VALUES (2, 11);
@@ -138,6 +138,15 @@ INSERT INTO fornece_sec(nif, ean) VALUES (8, 15);
 INSERT INTO fornece_sec(nif, ean) VALUES (9, 15);
 INSERT INTO fornece_sec(nif, ean) VALUES (10, 15);
 INSERT INTO fornece_sec(nif, ean) VALUES (11, 15);
+--INSERT INTO fornece_sec(nif, ean) VALUES (1, 1); -- TA MAL
+
+/*UPDATE fornece_sec
+SET nif = 1, ean = 1
+WHERE nif = 1 AND ean = 2; TA MAL */ 
+
+/*UPDATE produto
+SET forn_primario = 2, ean = 1
+WHERE forn_primario = 1 AND ean = 1; TA MAL*/
 
 /* MERCADO */
 INSERT INTO corredor(nro, largura) VALUES (1, 13);
