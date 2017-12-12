@@ -184,3 +184,23 @@ CREATE TABLE reposicoes_facts(
 	FOREIGN KEY(nro, lado, altura, operador, instante) REFERENCES reposicao(nro, lado, altura, operador, instante)
 
 );
+
+---- TRIGGER ----
+
+CREATE OR REPLACE FUNCTION cancel_fornece_sec_proc() 
+	RETURNS TRIGGER AS $$
+BEGIN
+    IF EXISTS(
+        SELECT forn_primario, ean
+        FROM produto
+        WHERE NEW.ean = produto.ean AND NEW.nif = produto.forn_primario) THEN
+		raise exception 'O fornecedor % ja e fornecedor primario do produto %', NEW.nif, NEW.ean;
+	END IF;
+	RETURN NEW;
+END
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER cancel_fornece_sec
+	AFTER INSERT ON fornece_sec
+	FOR EACH ROW
+	EXECUTE PROCEDURE cancel_fornece_sec_proc();
