@@ -8,7 +8,7 @@ from random import random
 from math import floor
 
 nr_prod = 100000			# For a good populate experience, must be bigger than this
-nr_suppliers = 1000
+nr_suppliers = 100
 allUseStr = ''
 categoryDict = {		# All of my 10 categories, it can be changed, but it doesn't improve much the test.
 	0: 'Tuberculos',
@@ -57,7 +57,7 @@ with open('populate.sql', 'w') as popFile:
 
 	# Inserting 'fornecedores secundarios' (a lot of them)
 	allUseStr = ''
-	for i in range(0, nr_prod * nr_suppliers):
+	for i in range(0, nr_prod):
 		ean = str(i % nr_prod)
 		nif = str(floor(random() * nr_suppliers))
 
